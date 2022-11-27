@@ -1,0 +1,3 @@
+pub struct Exported {
+  Exported (8),
+}

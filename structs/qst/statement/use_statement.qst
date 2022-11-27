@@ -1,0 +1,26 @@
+use std::ascii::{
+  DefaultConfig,
+  SkipWhiteSpace,
+  WhiteSpace,
+}
+
+use crate::{
+  property::Property,
+}
+
+pub struct UseStatement {
+  PublicUseStatement (in PublicUseStatement),
+  PrivateUseStatement (in UseStatementInternal),
+}
+
+struct PublicUseStatement with DefaultConfig, SkipWhiteSpace{
+  PublicKeyword (24) = "pub"
+  _ (in WhiteSpace),
+  UseStatementInternal (in UseStatementInternal),
+}
+
+struct UseStatementInternal with DefaultConfig, SkipWhiteSpace {
+  UseKeyword (24) = "use",
+  _ (in WhiteSpace),
+  Properties (in Property) *,
+}

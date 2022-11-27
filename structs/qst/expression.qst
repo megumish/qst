@@ -1,0 +1,47 @@
+use std::ascii::{
+  Integer,
+  Point,
+}
+
+use crate::identifier::{
+  Identifier,
+  ModuleId,
+}
+
+pub enum Expression (*) {
+  Constant (in Constant),
+  InExpression (in InExpression),
+}
+
+pub enum Constant (*) {
+  ArbitraryRange (in ArbitraryRange),
+  RangedValue (in RangedValue),
+  Integer (in Integer),
+}
+
+struct ArbitraryRange {
+  FirstPoint (in Point),
+  SecondPoint (in Point),
+}
+
+struct RangedValue {
+  StartInteger (in Integer),
+  Range (in ArbitraryRange),
+  EndInteger (in Integer),
+}
+
+struct InExpression {
+  InKeyword (16) "in",
+  IdentifierOrModuleId (in IdentifierOrModuleId)
+}
+
+enum IdentifierOrModuleId {
+  Identifier (in Identifier),
+  ModuleIdAndTurboFish (in ModuleIdAndTurboFish)
+}
+
+struct ModuleIdAndTurboFish {
+  ModuleId (in ModuleId),
+  TurboFish (in TurboFish),
+  IdentifierOrModuleId (in IdentifierOrModuleId),
+}

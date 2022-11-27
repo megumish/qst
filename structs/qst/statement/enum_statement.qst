@@ -1,0 +1,30 @@
+use std::ascii::{
+  DefaultConfig,
+  SkipWhiteSpace,
+  WhiteSpace,
+  LeftBrace,
+  RightBrace,
+}
+use crate::identifier::Identifier
+use field::Fields
+
+mod field
+
+pub enum EnumStatement (*) {
+  PublicEnumStatement (in PublicEnumStatement),
+  PrivateEnumStatement (in EnumStatementInternal),
+}
+
+struct PublicEnumStatement with DefaultConfig, SkipWhiteSpace {
+  PublicKeyword (24) = "pub",
+  EnumStatementInternal (in EnumStatementInternal),
+}
+
+struct EnumStatementInternal with DefaultConfig, SkipWhiteSpace {
+  EnumKeyword (32) = "enum",
+  _ (in WhiteSpace),
+  Identifier (in Identifier),
+  LeftBrace (in LeftBrace),
+  Fields (in Fields),
+  RightBrace (in RightBrace),
+}

@@ -1,0 +1,5 @@
+use std::le::Config;
+
+struct Arbitrary with Config {
+  Arbitrary (*),
+}

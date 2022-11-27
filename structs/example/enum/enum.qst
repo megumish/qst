@@ -1,0 +1,6 @@
+enum Enum (8) {
+  VariantOne = 1,
+  VariantTwo = 2,
+  VariantThreeToFour = 3..4,
+  VariantOther = ?,
+}

@@ -1,0 +1,4 @@
+struct NotInferedRepeated {
+  Repeated (8) *,
+  EightBitVariable (8),
+}

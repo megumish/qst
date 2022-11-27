@@ -1,0 +1,49 @@
+use std::ascii::{
+  SkipWhiteSpace,
+  LeftParenthesis,
+  RightParenhesis,
+  Assign,
+  Question,
+}
+
+use crate::{
+  identifier::Identifier,
+  expression::{
+    Expression,
+    Constant,
+  }
+}
+
+pub struct Fields with SkipWhiteSpace {
+  Identifier (in Identifier),
+  LeftParenthesis (in LeftParenthesis),
+  Expression (in Expression),
+  RightParenthesis (in RightParenthesis),
+  AssignOrComma (in AssignOrComma),
+}
+
+enum AssignOrComma (*) {
+  AssignAndValue (in AssignAndValue),
+  CommaOrTrailing (in CommaOrTrailing),
+}
+
+struct AssignAndValue with SkipWhiteSpace {
+  Assign (in Assign),
+  Value (in Value),
+  CommaOrTrailing (in CommaOrTrailing),
+}
+
+enum Value (*) {
+  Constant (in Constant),
+  Question (in Question),
+}
+
+enum CommaOrTrailing (*) {
+  CommaAndField (in CommaAndField),
+  TrailingComma (in Comma),
+}
+
+struct CommaAndField with SkipWhiteSpace {
+  Comma (in Comma),
+  Fields (in Fields),
+}

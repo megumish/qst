@@ -1,0 +1,3 @@
+struct Repeated {
+  Repeated (8) *,
+}

@@ -1,0 +1,5 @@
+use std::le::Config;
+
+struct VariableLength with Config{
+  VaribaleLength (8..32),
+}

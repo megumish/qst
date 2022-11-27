@@ -1,0 +1,13 @@
+use std::ascii::{
+  DefaultConfig,
+  SkipWhiteSpace,
+  WhiteSpace,
+}
+
+use crate::identifier::ModuleId
+
+pub ModStatement with DefaultConfig, SkipWhiteSpace {
+  ModuleKeyword (24) = "mod",
+  _ (in WhiteSpace),
+  Id (in ModuleId),
+}

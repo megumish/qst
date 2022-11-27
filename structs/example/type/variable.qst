@@ -1,0 +1,3 @@
+struct Variable {
+  Variable (8),
+}

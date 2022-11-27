@@ -1,0 +1,6 @@
+use std::le::Config;
+
+struct NotInferedArbitraryLength with Config {
+  ArbitraryLength (*),
+  EightBitVariable (8),
+}

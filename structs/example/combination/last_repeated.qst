@@ -1,0 +1,4 @@
+struct LastRepeated {
+  EightBitVariableValue (8),
+  LastRepeated (8) *,
+}

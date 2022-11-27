@@ -1,0 +1,56 @@
+use std::ascii::{
+  Slash,
+  Star,
+  Line,
+  Printable
+  BackSlash,
+}
+
+pub enum Comment (*) {
+  LineComment (in LineComment),
+  BlockComment (in BlockComment),
+}
+
+struct LineComment {
+  FirstSlash (in Slash),
+  SecondSlash (in Slash),
+  LineOrCharacter (in LineOrCharacter),
+}
+
+enum LineOrCharacter (*) {
+  Line (in Line),
+  BackSlashAndCharacter (in BackSlashAndLineCommentCharacter),
+  Character (in LineCommentCharacter),
+}
+
+struct BackSlashAndLineCommentCharacter {
+  BackSlash (in BackSlash),
+  Character (in LineCommentCharacter),
+}
+
+struct LineCommentCharacter {
+  Character (in Printable),
+  LineOrCharacter (in LineOrCharacter),
+}
+
+struct BlockComment {
+  FirstSlash (in Slash),
+  FirstStar (in Star),
+  StarOrCharacter (in StarOrCharacter),
+}
+
+enum StarOrCharacter (*) {
+  StarAndSlash (in StarAndSlash),
+  BackSlashAndCharacter (in BackSlashAndBlockCommentCharacter),
+  Character (in BlockCommentCharacter),
+}
+
+struct BackSlashAndBlockCommentCharacter {
+  BackSlash (in BackSlash),
+  Character (in BlockCommentCharacter),
+}
+
+struct BlockCommentCharacter {
+  Character (in Printable),
+  StarOrCharacter (in StarOrCharacter),
+}

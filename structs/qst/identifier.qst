@@ -1,0 +1,12 @@
+use std::ascii::{
+  UpperCamelCase,
+  SnakeCase,
+}
+
+pub struct Identifier {
+  Identifier (in UpperCamelCase),
+}
+
+pub struct ModuleId {
+  ModuleId (in SnakeCase),
+}

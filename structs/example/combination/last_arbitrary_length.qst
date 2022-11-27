@@ -1,0 +1,6 @@
+use std::le::Config;
+
+struct LastArbitraryLength with Config {
+  EightBitVariableValue (8),
+  LastArbitraryLength (*),
+}

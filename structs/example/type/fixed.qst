@@ -1,0 +1,3 @@
+struct Fixed {
+  SevenBitFieldFixed (7) = 61,
+}

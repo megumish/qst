@@ -1,0 +1,5 @@
+use ::export::Exported;
+
+struct Imported {
+  Imported (in Exported),
+}

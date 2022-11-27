@@ -1,0 +1,49 @@
+use std::ascii::{
+  LeftBrace,
+  RightBrace,
+  SkipWhiteSpace,
+  Comma,
+  Line,
+}
+
+use crate::identifier::{
+  Identiifer,
+  ModuleId,
+}
+
+pub enum Property (*) {
+  IdOrModule (in IdOrModule),
+  Properties (in Properties),
+}
+
+enum IdOrModule (*) {
+  Identifier (in Identifier),
+  ModuleAndTurboFish (in ModuleAndTurboFish),
+}
+
+struct ModuleAndTurboFish with SkipWhiteSpace {
+  Module (in ModuleId),
+  TurboFishAndProperty (in TurboFishAndProperty)
+}
+
+struct TurboFishAndProperty {
+  TurboFish (16) = "::",
+  Property (in Property),
+}
+
+struct Properties with SkipWhiteSpace {
+  LeftBrace (in LeftBrace),
+  Property (in Property),
+  CommaOrTrailing (in CommaOrTrailing),
+  RightBrace (in RightBrace),
+}
+
+enum CommaOrTrailing (*) {
+  CommaAndProperty (in CommaAndProperty),
+  TrailingComma (in Comma),
+}
+
+struct CommaAndProperty with SkipWhiteSpace {
+  Comma (in Comma),
+  Property (in Property),
+}

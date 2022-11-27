@@ -1,0 +1,69 @@
+use std::ascii::{
+  WhiteSpace,
+  SkipWhiteSpace,
+  LeftParenthesis,
+  RightParenthesis,
+  Star,
+  Colon,
+  Comma,
+  Assign,
+}
+
+use crate::{
+  identifier::Identifier,
+  expression::{
+    Expression,
+    Constant,
+  },
+}
+
+pub struct Fields with SkipWhiteSpace {
+  Identifier (in Identifier),
+  LeftParenthesis (in LeftParenthesis),
+  Expression (in Expression),
+  RightParenhesis (in RightParenhesis),
+  StarOrColon (in StarOrColon),
+}
+
+enum StarOrColon (*) {
+  StarAndExpression (in StarAndExpression),
+  ColonOrComma (in ColonOrComma),
+}
+
+struct StarAndExpression with SkipWhiteSpace {
+  Star (in Star),
+  Expression (in Expression),
+  ColonOrComma (in ColonOrComma),
+}
+
+enum ColonOrComma (*) {
+  ColonAndExpression (in ColonAndExpression),
+  AssignOrComma (in AssignOrComma),
+}
+
+struct ColonAndExpression with SkipWhiteSpace {
+  Colon (in Colon),
+  Expression (in Expression),
+  AssignOrComma (in AssignOrComma),
+}
+
+enum AssignOrComma (*) {
+  AssignAndConstant (in AssignOrConstant),
+  CommaOrTrailing (in CommaOrTrailing),
+}
+
+struct AssignAndConstant with SkipWhiteSpace {
+  Assign (in Assign),
+  Constant (in Constant),
+  CommaOrTrailing (in CommaOrTrailing),
+}
+
+enum CommaOrTrailing (*) {
+  CommaAndField (in CommaAndField),
+  TrailingComma (in Comma),
+}
+
+struct CommaAndField with SkipWhiteSpace {
+  Comma (in Comma),
+  Fields (in Fields),
+}

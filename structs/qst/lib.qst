@@ -1,0 +1,16 @@
+use std::ascii::Line
+use statement::Statement
+
+mod statement
+mod property
+mod identifier
+mod expression
+
+struct Code {
+  Statement (in StatementLine) *,
+}
+
+struct StatementLine {
+  Statement (in Statement),
+  Line (in Line),
+}

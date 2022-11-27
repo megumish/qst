@@ -1,0 +1,4 @@
+struct InferedRepeated {
+  EightBitVariableValue (8),
+  InferedRepated (8) * EightBitVariableValue,
+}
