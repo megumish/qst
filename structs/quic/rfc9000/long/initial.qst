@@ -1,0 +1,29 @@
+use crate::var_int::VarInt
+
+pub struct InitialPacket {
+  HeaderForm (1) = 1,
+  FixedBit (1) = 1,
+  LongPacketType (2) = 0,
+  ReservedBits (2),
+  PacketNumberLength (2),
+  Version (32),
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..160) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..160) : SourceConnectionIdLength * 8,
+  TokenLength (in VarInt),
+  Token (..) : TokenLength, 
+  Length (in VarInt),
+  PacketNumber (8..32) : PacketNumberLength * 8,
+  PacketPayload (8..) : Length - PacketNumberLength * 8,
+}
+
+pub struct InitialPacketSpecificPayload(
+  PacketNumberLength (2),
+) {
+  TokenLength (in VarInt),
+  Token (..) : TokenLength, 
+  Length (in VarInt),
+  PacketNumber (8..32) : PacketNumberLength * 8,
+  PacketPayload (8..) : Length - PacketNumberLength * 8,
+}

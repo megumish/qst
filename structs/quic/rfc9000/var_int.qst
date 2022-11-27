@@ -1,0 +1,4 @@
+pub struct VarInt {
+    TwoMsb (2),
+    UsableBits (6..62) : TwoMsb + 1,
+}

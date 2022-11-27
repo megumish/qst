@@ -1,0 +1,32 @@
+use std::network::DefaultConfig
+
+pub struct LongHeaderPacket with DefaultConfig {
+  HeaderForm (1) = 1,
+  VersionSpecificBits (7),
+  Version (32),
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..2040) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..2040) : SourceConnectionIdLength * 8,
+  VersionSpecificData (..),
+}
+
+pub struct ShortHeaderPacket(
+  DestinationConnectionIdLength (8),
+) with DefaultConfig {
+  HeaderForm (1) = 0,
+  VersionSpecificBits (7),
+  DestinationConnectionId (..) : DestinationConnectionIdLength * 8,
+  VersionSpecificData (..),
+}
+
+pub struct VersionNegotiationPacket {
+  HeaderForm (1) = 1,
+  Unused (7),
+  Version (32) = 0,
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..2040) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..2040) : SourceConnectionIdLength * 8,
+  SupportedVersion (32) *,
+}

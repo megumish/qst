@@ -4,13 +4,15 @@ use std::ascii::{
   WhiteSpace,
   LeftBrace,
   RightBrace,
+  LeftParenthesis,
+  RightParenhesis,
 }
 use crate::identifier::Identifier
 use field::Fields
 
 mod field
 
-pub enum StructStatement (*) {
+pub enum StructStatement (..) {
   PublicStructStatement (in PublicStructStatement),
   PrivateStructStatement (in StructStatementInternal),
 }
@@ -24,6 +26,22 @@ struct StructStatementInternal with DefaultConfig, SkipWhiteSpace {
   StructKeyword (48) = "struct",
   _ (in WhiteSpace),
   Identifier (in Identifier),
+  LeftParenthesisOrLeftBrace (in LeftParenthesisOrLeftBrace),
+}
+
+enum LeftParenthesisOrLeftBrace with SkipWhiteSpace {
+  LeftParenthesisAndFields (in LeftParenthesisAndFields),
+  LeftBraceAndFields (in LeftBraceAndFields),
+}
+
+struct LeftParenthesisAndFields with SkipWhiteSpace {
+  LeftParenthesis (in LeftParenthesis),
+  Fields (in Fields),
+  RightParenthesis (in RightParenthesis),
+  LeftBraceAndFields (in LeftBraceAndFields),
+}
+
+struct LeftBraceAndFields with SkipWhiteSpace {
   LeftBrace (in LeftBrace),
   Fields (in Fields),
   RightBrace (in RightBrace),

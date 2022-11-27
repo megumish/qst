@@ -10,7 +10,6 @@ use crate::{
   identifier::Identifier,
   expression::{
     Expression,
-    Constant,
   }
 }
 
@@ -22,7 +21,7 @@ pub struct Fields with SkipWhiteSpace {
   AssignOrComma (in AssignOrComma),
 }
 
-enum AssignOrComma (*) {
+enum AssignOrComma (..) {
   AssignAndValue (in AssignAndValue),
   CommaOrTrailing (in CommaOrTrailing),
 }
@@ -33,12 +32,12 @@ struct AssignAndValue with SkipWhiteSpace {
   CommaOrTrailing (in CommaOrTrailing),
 }
 
-enum Value (*) {
-  Constant (in Constant),
+enum Value (..) {
+  Integer (in Integer),
   Question (in Question),
 }
 
-enum CommaOrTrailing (*) {
+enum CommaOrTrailing (..) {
   CommaAndField (in CommaAndField),
   TrailingComma (in Comma),
 }

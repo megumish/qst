@@ -1,0 +1,13 @@
+pub struct OneRttPacket(
+  DestinationConnectionIdLength (8),
+) {
+  HeaderForm (1) = 0,
+  FiexdBit (1) = 1,
+  SpinBit (1),
+  ReservedBits (2),
+  KeyPhase (1),
+  PacketNumberLength (2),
+  DestinationConnectionId (0..160) : DestinationConnectionIdLength,
+  PacketNumber (8..32) : PacketNumberLength,
+  PacketPayload (8..),
+}

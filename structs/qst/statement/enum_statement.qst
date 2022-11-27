@@ -10,7 +10,7 @@ use field::Fields
 
 mod field
 
-pub enum EnumStatement (*) {
+pub enum EnumStatement (..) {
   PublicEnumStatement (in PublicEnumStatement),
   PrivateEnumStatement (in EnumStatementInternal),
 }

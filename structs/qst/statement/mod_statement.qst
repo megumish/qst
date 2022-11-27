@@ -6,7 +6,18 @@ use std::ascii::{
 
 use crate::identifier::ModuleId
 
-pub ModStatement with DefaultConfig, SkipWhiteSpace {
+pub enum ModStatement {
+  PublicModStatement (in PublicModStatement),
+  PrivateModStatement (in ModStatementInternal),
+}
+
+struct PublicModStatement with DefaultConfig, SkipWhiteSpace {
+  PublicKeyword (24) = "pub",
+  _ (in WhiteSpace),
+  ModStatementInternal (in ModStatementInternal)
+}
+
+struct ModStatementInternal with DefaultConfig, SkipWhiteSpace {
   ModuleKeyword (24) = "mod",
   _ (in WhiteSpace),
   Id (in ModuleId),

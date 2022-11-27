@@ -6,7 +6,7 @@ use std::ascii::{
   BackSlash,
 }
 
-pub enum Comment (*) {
+pub enum Comment (..) {
   LineComment (in LineComment),
   BlockComment (in BlockComment),
 }
@@ -17,7 +17,7 @@ struct LineComment {
   LineOrCharacter (in LineOrCharacter),
 }
 
-enum LineOrCharacter (*) {
+enum LineOrCharacter (..) {
   Line (in Line),
   BackSlashAndCharacter (in BackSlashAndLineCommentCharacter),
   Character (in LineCommentCharacter),
@@ -39,7 +39,7 @@ struct BlockComment {
   StarOrCharacter (in StarOrCharacter),
 }
 
-enum StarOrCharacter (*) {
+enum StarOrCharacter (..) {
   StarAndSlash (in StarAndSlash),
   BackSlashAndCharacter (in BackSlashAndBlockCommentCharacter),
   Character (in BlockCommentCharacter),

@@ -8,13 +8,13 @@ use crate::{
   property::Property,
 }
 
-pub struct UseStatement {
+pub enum UseStatement {
   PublicUseStatement (in PublicUseStatement),
   PrivateUseStatement (in UseStatementInternal),
 }
 
-struct PublicUseStatement with DefaultConfig, SkipWhiteSpace{
-  PublicKeyword (24) = "pub"
+struct PublicUseStatement with DefaultConfig, SkipWhiteSpace {
+  PublicKeyword (24) = "pub",
   _ (in WhiteSpace),
   UseStatementInternal (in UseStatementInternal),
 }

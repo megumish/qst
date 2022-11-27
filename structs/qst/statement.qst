@@ -10,7 +10,7 @@ mod struct_statement
 mod enum_statement
 mod comment
 
-enum Statement (*) {
+enum Statement (..) {
   Use = in UseStatement,
   Mod = in ModStatement,
   Struct = in StructStatement,

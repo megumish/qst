@@ -2,5 +2,5 @@ use std::le::Config;
 
 struct InferedArbitaryLength with Config {
   EightBitVariableValue (8),
-  InferedArbitaryLength (*) : EightBitVariableValue,
+  InferedArbitaryLength (..) : EightBitVariableValue,
 }

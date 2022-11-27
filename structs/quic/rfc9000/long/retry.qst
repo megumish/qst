@@ -1,0 +1,15 @@
+pub struct RetryPacket(
+  RetryTokenLength (i),
+) {
+  HeaderForm (1) = 1,
+  FixedBit (1) = 1,
+  LongPacketType (2) = 3,
+  Unused (4),
+  Version (32),
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..160) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..160) : SourceConnectionIdLength * 8,
+  RetryTokenLength (..) : RetryTokenLength * 8,
+  RetryIntegrityTag (128),
+}

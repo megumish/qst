@@ -1,6 +1,6 @@
-use std::le::Config;
+use std::le::Default;
 
-struct NotInferedArbitraryLength with Config {
-  ArbitraryLength (*),
+struct NotInferedArbitraryLength with Default {
+  ArbitraryLength (..),
   EightBitVariable (8),
 }

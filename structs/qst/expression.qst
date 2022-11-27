@@ -1,6 +1,7 @@
 use std::ascii::{
   Integer,
   Point,
+  SkipWhiteSpace,
 }
 
 use crate::identifier::{
@@ -8,26 +9,64 @@ use crate::identifier::{
   ModuleId,
 }
 
-pub enum Expression (*) {
-  Constant (in Constant),
+pub enum Expression (..) {
   InExpression (in InExpression),
+  IdentifierOrConstant (in IdentifierOrConstant),
 }
 
-pub enum Constant (*) {
-  ArbitraryRange (in ArbitraryRange),
+enum IdentifierOrConstant (..) {
+  IdentifierOrIdExpression (in IdentifierOrIdExpression),
+  Constant (in Constant),
+}
+
+enum IdentifierOrIdExpression (..) {
+  IdentifierAndOperator (in IdentifierAndOperator),
+  Identifier (in Identifier),
+}
+
+struct IdentifierAndOperator {
+  Identifier (in Identifier),
+  Operator (in Operator),
+  IdentifierOrConstant (in IdentifierOrConstant),
+}
+
+enum Constant (..) {
   RangedValue (in RangedValue),
   Integer (in Integer),
 }
 
-struct ArbitraryRange {
+struct RangedValue {
+  IntgerOrArbitraryRange (in IntegerOrArbitraryRange),
+}
+
+enum IntgerOrArbitraryRange {
+  IntegerAndRange (in IntegerAndRange),
+  Range (in Range),
+}
+
+struct IntegerAndRange {
+  Intger (in Intger)
+  RangeOrRangeAndInteger (in RangeOrRangeAndInteger),
+}
+
+enum RangeOrRangeAndInteger {
+  RangeAndInteger (in RangeAndInteger),
+  Range (in Range),
+}
+
+struct RangeAndInteger {
+  Range (in Range),
+  Integer (in Integer),
+}
+
+struct Range {
   FirstPoint (in Point),
   SecondPoint (in Point),
 }
 
-struct RangedValue {
-  StartInteger (in Integer),
-  Range (in ArbitraryRange),
-  EndInteger (in Integer),
+struct Range {
+  FirstPoint (in Point),
+  SecondPoint (in Point),
 }
 
 struct InExpression {

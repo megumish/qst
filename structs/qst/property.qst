@@ -11,12 +11,12 @@ use crate::identifier::{
   ModuleId,
 }
 
-pub enum Property (*) {
+pub enum Property (..) {
   IdOrModule (in IdOrModule),
   Properties (in Properties),
 }
 
-enum IdOrModule (*) {
+enum IdOrModule (..) {
   Identifier (in Identifier),
   ModuleAndTurboFish (in ModuleAndTurboFish),
 }
@@ -38,7 +38,7 @@ struct Properties with SkipWhiteSpace {
   RightBrace (in RightBrace),
 }
 
-enum CommaOrTrailing (*) {
+enum CommaOrTrailing (..) {
   CommaAndProperty (in CommaAndProperty),
   TrailingComma (in Comma),
 }

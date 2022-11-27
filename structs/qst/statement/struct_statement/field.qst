@@ -3,17 +3,17 @@ use std::ascii::{
   SkipWhiteSpace,
   LeftParenthesis,
   RightParenthesis,
-  Star,
   Colon,
+  Star,
   Comma,
   Assign,
+  Integer,
 }
 
 use crate::{
   identifier::Identifier,
   expression::{
     Expression,
-    Constant,
   },
 }
 
@@ -22,43 +22,43 @@ pub struct Fields with SkipWhiteSpace {
   LeftParenthesis (in LeftParenthesis),
   Expression (in Expression),
   RightParenhesis (in RightParenhesis),
-  StarOrColon (in StarOrColon),
+  ColonOrStar (in ColonOrStar),
 }
 
-enum StarOrColon (*) {
-  StarAndExpression (in StarAndExpression),
-  ColonOrComma (in ColonOrComma),
-}
-
-struct StarAndExpression with SkipWhiteSpace {
-  Star (in Star),
-  Expression (in Expression),
-  ColonOrComma (in ColonOrComma),
-}
-
-enum ColonOrComma (*) {
+enum ColonOrStar (..) {
   ColonAndExpression (in ColonAndExpression),
-  AssignOrComma (in AssignOrComma),
+  StarOrComma (in StarOrComma),
 }
 
 struct ColonAndExpression with SkipWhiteSpace {
   Colon (in Colon),
   Expression (in Expression),
+  StarOrComma (in StarOrComma),
+}
+
+enum StarOrComma (..) {
+  StarAndExpression (in StarAndExpression),
   AssignOrComma (in AssignOrComma),
 }
 
-enum AssignOrComma (*) {
-  AssignAndConstant (in AssignOrConstant),
+struct StarAndExpression with SkipWhiteSpace {
+  Star (in Star),
+  Expression (in Expression),
+  AssignOrComma (in AssignOrComma),
+}
+
+enum AssignOrComma (..) {
+  AssignAndInteger (in AssignOrInteger),
   CommaOrTrailing (in CommaOrTrailing),
 }
 
-struct AssignAndConstant with SkipWhiteSpace {
+struct AssignAndInteger with SkipWhiteSpace {
   Assign (in Assign),
-  Constant (in Constant),
+  Integer (in Integer),
   CommaOrTrailing (in CommaOrTrailing),
 }
 
-enum CommaOrTrailing (*) {
+enum CommaOrTrailing (..) {
   CommaAndField (in CommaAndField),
   TrailingComma (in Comma),
 }

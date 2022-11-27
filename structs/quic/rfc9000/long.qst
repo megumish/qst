@@ -1,0 +1,14 @@
+pub mod initial
+
+pub struct LongHeaderPacket {
+  HeaderForm (1) = 1,
+  FixedBit (1) = 1,
+  LongPacketType (2),
+  TypeSpecificBits (4),
+  Version (32),
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..160) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..160) : SourceConnectionIdLength * 8,
+  TypeSpecificPayload (..),
+}

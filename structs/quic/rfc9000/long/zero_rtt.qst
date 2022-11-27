@@ -1,0 +1,25 @@
+use crate::var_int::VarInt
+
+pub struct ZeroRttPacket {
+  HeaderForm (1) = 1,
+  FixedBit (1) = 1,
+  LongPacketType (2) = 1,
+  ReservedBits (2),
+  PacketNumberLength (2),
+  Version (32),
+  DestinationConnectionIdLength (8),
+  DestinationConnectionId (0..160) : DestinationConnectionIdLength * 8,
+  SourceConnectionIdLength (8),
+  SourceConnectionId (0..160) : SourceConnectionIdLength * 8,
+  Length (in VarInt),
+  PacketNumber (8..32) : PacketNumberLength * 8,
+  PacketPayload (8..) : Length - PacketNumberLength * 8,
+}
+
+pub struct ZeroRttPacketSpecificPayload(
+  PacketNumberLength (2),
+) {
+  Length (in VarInt),
+  PacketNumber (8..32) : PacketNumberLength * 8,
+  PacketPayload (8..) : Length - PacketNumberLength * 8,
+}
